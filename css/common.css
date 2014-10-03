@@ -4,10 +4,50 @@
 	Version: 1.0
 	License: GPL V2
 */
-h1,h2,h3,h4,h5,h6{
 
+/* Modern Box Model */
+* {
+	box-sizing: border-box;
 }
-a{ color: #XXXXXX; }
+/* Better-than-default CSS Text Rendering */
+html {
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: subpixel-antialiased;
+}
+/* Block feedback from an element via CSS */
+.noTouching {
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	-o-user-select: none;
+	user-select: none;
+	cursor: default;
+}
+/* Remove grey tap outline on mobile devices */
+a, button {
+	-webkit-tap-highlight-color: transparent !important;
+}
+/* Common */
+body {
+	font-family: 'Open Sans', sans-serif;
+}
+h1,h2,h3,h4,h5,h6{
+	font-family: 'Open Sans', sans-serif;
+}
+h1 { font-size:30px;}
+h2 { font-size:22px;}
+h3 { font-size:20px;}
+h4 { font-size:18px;}
+h5 { font-size:16px;}
+article h1,
+article h2,
+article h3,
+article h4,
+article h5,
+article h6 {
+	font-weight:bold;
+}
+a, a:visited{ color: #XXXXXX; }
 a:hover{ color: #XXXXXX;}
 
 .left{ float: left;}
