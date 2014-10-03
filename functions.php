@@ -128,3 +128,100 @@ require get_template_directory() . '/inc/customizer.php';
  * Load Jetpack compatibility file.
  */
 require get_template_directory() . '/inc/jetpack.php';
+
+/* 
+ * ------------------------------------------------------------- *
+ * ARI Functions
+ * ------------------------------------------------------------- *
+ */
+
+/* 
+ * ------------------------------------------------------------- *
+ * Hover Intent
+ * ------------------------------------------------------------- *
+ */
+// make a little function to enqueue hoverIntent:
+function enq_hoverIntent() { wp_enqueue_script('hoverIntent'); }
+// now make WP run it:
+add_action('wp_enqueue_scripts', 'enq_hoverIntent');
+
+// enclose some jQuery script in a php function:
+function init_hoverIntent() { ?>
+<script type='text/javascript'>
+  jQuery(document).ready(function(){
+	jQuery('nav li').hoverIntent({
+	  over : navover,
+	  out : navout,
+	  timeout : 100
+	});
+	// (how to use both fade and slide effects!):
+	function navover(){
+	  jQuery(this).children('ul')
+		.stop(true,true)
+		.fadeIn({duration:600,queue:false})
+		.css('display','none')
+		.slideDown(600);
+	}
+	function navout(){
+	  jQuery(this).children('ul')
+		.stop(true,true)
+		.fadeOut({duration:300,queue:false})
+		.slideUp(300);
+	}
+  });
+</script>
+<?php }
+// now make WP load that into the head section of the html page:
+add_action('wp_head', 'init_hoverIntent');
+/* 
+ * ------------------------------------------------------------- *
+ * END Hover Intent
+ * ------------------------------------------------------------- *
+ */
+
+// Load Shotcodes in Text Widgets
+add_filter( 'widget_text', 'do_shortcode' );
+
+// Excerpt Length
+function custom_excerpt_length( $length ) {
+	return 40;
+}
+add_filter( 'excerpt_length', 'custom_excerpt_length', 999 );
+
+// Excerpt String
+function new_excerpt_more( $more ) {
+	return '...';
+}
+add_filter('excerpt_more', 'new_excerpt_more');
+
+// Next & Previous Post Link Classes
+add_filter('next_posts_link_attributes', 'posts_link_attributes_1');
+add_filter('previous_posts_link_attributes', 'posts_link_attributes_2');
+
+function posts_link_attributes_1() {
+	return 'class="next-post-link"';
+}
+function posts_link_attributes_2() {
+	return 'class="next-post-link"';
+}
+
+// Post List Featured Image
+add_filter('manage_posts_columns', 'featured_image_add_column');
+add_filter('manage_pages_columns', 'featured_image_add_column');
+
+function featured_image_add_column($columns) 
+{
+	$columns['featured_image'] = 'Image';
+	return $columns;
+}
+
+add_action('manage_posts_custom_column', 'featured_image_render_post_columns', 10, 2);
+
+function featured_image_render_post_columns($column_name, $id) 
+{
+	if($column_name == 'featured_image')
+	{
+		$thumb = get_the_post_thumbnail( $id, array(50,50) );
+		if($thumb) { echo $thumb; }
+	}
+}
