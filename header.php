@@ -22,7 +22,7 @@
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300,800' rel='stylesheet' type='text/css'>
 	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="<?php bloginfo('template_directory'); ?>/js/slick/slick.css" type="text/css" media="all" />
-	<link rel="stylesheet" id="fresh-mindset-style-css"  href="<?php bloginfo('template_directory'); ?>/css/common.css" type="text/css" media="all" />
+	<link rel="stylesheet" id="fresh-mindset-style-css"  href="<?php bloginfo('template_directory'); ?>/css/custom.css" type="text/css" media="all" />
 	<link rel="stylesheet" id="fresh-mindset-style-css"  href="<?php bloginfo('template_directory'); ?>/css/responsive.css" type="text/css" media="all" />
 </head>
 
